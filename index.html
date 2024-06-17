@@ -1,52 +1,57 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Integration</title>
 </head>
 <body>
-<h1>MetaMask Account Info</h1>
-    
+    <h1>MetaMask Integration Example</h1>
+
     <!-- Button to connect MetaMask -->
     <button onclick="connectMetaMask()">Connect MetaMask</button>
-    
-    <!-- Placeholder for displaying account address -->
-    <div id="accountAddress"></div>
-    
-    <!-- Placeholder for displaying account balance -->
-    <div id="accountBalance"></div>
 
+    <!-- Placeholder for displaying account information -->
+    <div id="accountInfo">
+        <p id="accountAddress">Account Address: </p>
+        <p id="accountBalance">Account Balance: </p>
+    </div>
+
+    <!-- Include MetaMask test dapp scripts -->
+    <script src="https://metamask.github.io/test-dapp/metamask.js"></script>
+    <script src="https://metamask.github.io/test-dapp/index.js"></script>
+
+    <!-- Your custom JavaScript -->
     <script>
-        // JavaScript code goes here
+        // Function to connect MetaMask
         async function connectMetaMask() {
             try {
-                // Check if MetaMask is installed
-                if (typeof window.ethereum !== 'undefined') {
-                    console.log('MetaMask is installed!');
-                    
+                // Check if MetaMask is installed and enabled
+                const { ethereum } = window;
+                if (ethereum && ethereum.isMetaMask) {
                     // Request MetaMask account access
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
                     const account = accounts[0];
                     
                     // Display account address
-                    document.getElementById('accountAddress').innerText = 'Account Address: ' + account;
+                    document.getElementById('accountAddress').textContent = 'Account Address: ' + account;
 
                     // Initialize Web3 with MetaMask provider
-                    const web3 = new Web3(window.ethereum);
+                    const web3 = new Web3(ethereum);
 
                     // Fetch account balance
                     const balanceWei = await web3.eth.getBalance(account);
                     const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
 
                     // Display account balance
-                    document.getElementById('accountBalance').innerText = 'Account Balance: ' + balanceEth + ' ETH';
+                    document.getElementById('accountBalance').textContent = 'Account Balance: ' + balanceEth + ' ETH';
+
                 } else {
-                    // MetaMask is not installed, prompt to install
-                    alert('MetaMask is not installed. Please install MetaMask to use this feature.');
+                    // MetaMask is not installed or not enabled
+                    alert('MetaMask is not installed or not enabled. Please install MetaMask to use this feature.');
                 }
             } catch (error) {
-                // Handle errors while connecting MetaMask
+                // Handle errors
                 console.error('Error connecting MetaMask:', error);
                 alert('MetaMask connection failed. Please try again.');
             }
