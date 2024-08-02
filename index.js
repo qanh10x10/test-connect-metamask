@@ -39,9 +39,9 @@ function unityShowBanner(msg, type) {
 var buildUrl = "Build";
 var loaderUrl = buildUrl + "/TestClipboard.loader.js";
 var config = {
-    dataUrl: buildUrl + "/TestClipboard.data.br",
-    frameworkUrl: buildUrl + "/TestClipboard.framework.js.br",
-    codeUrl: buildUrl + "/TestClipboard.wasm.br",
+    dataUrl: buildUrl + "/TestClipboard.data",
+    frameworkUrl: buildUrl + "/TestClipboard.framework.js",
+    codeUrl: buildUrl + "/TestClipboard.wasm",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "TestClipboardPermission",

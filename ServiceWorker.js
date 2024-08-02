@@ -1,9 +1,9 @@
 const cacheName = "DefaultCompany-TestClipboardPermission-1.0";
 const contentToCache = [
     "Build/TestClipboard.loader.js",
-    "Build/TestClipboard.framework.js.br",
-    "Build/TestClipboard.data.br",
-    "Build/TestClipboard.wasm.br",
+    "Build/TestClipboard.framework.js",
+    "Build/TestClipboard.data",
+    "Build/TestClipboard.wasm",
     "TemplateData/style.css"
 
 ];
